@@ -11,8 +11,8 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
         <StoreProvider>
-            <html lang="en" className="size-full flex justify-center">
-                <body className="size-full  max-w-[550px] ">{children}</body>
+            <html lang="en" className="size-full flex justify-center bg-slate-700">
+                <body className="size-full  max-w-[550px] rounded-xl">{children}</body>
             </html>
         </StoreProvider>
     );
