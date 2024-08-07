@@ -52,7 +52,7 @@ export default function useContentSwitcher() {
         if (isOpen && content) {
             timer.current = setTimeout(() => {
                 nextContent();
-            }, 2000);
+            }, 5000);
         } else {
             clearTimeout(timer.current);
         }
