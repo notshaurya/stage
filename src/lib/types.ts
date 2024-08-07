@@ -7,7 +7,7 @@ export interface iStory {
 export interface iStories {
     stories: iStory[];
 }
-export interface iOpenStory extends iStory {
+export interface iOpenStory extends Partial<iStory> {
     isOpen: boolean;
 }
 

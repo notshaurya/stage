@@ -12,7 +12,7 @@ export default function useContentSwitcher() {
 
     const dispatch = useDispatch();
 
-    const timer = useRef();
+    const timer = useRef<ReturnType<typeof setTimeout>>();
 
     async function fetchContent(id: number) {
         const response = await fetch("/api/contents", { method: "POST", body: JSON.stringify({ id }) });
