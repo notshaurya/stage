@@ -23,13 +23,12 @@ export default function useContentSwitcher() {
     function nextContent() {
         if (content[currentContentIndex + 1]) setCurrentContent(currentContentIndex + 1);
         else {
-            setCurrentContent(0);
             if (stories[id]) {
+                setCurrentContent(0);
                 dispatch(openStoryAction({ ...stories[id] }));
                 fetchContent(id + 1);
             } else {
-                clearTimeout(timer.current);
-                dispatch(openStoryAction({ isOpen: false }));
+                triggerClose();
             }
         }
     }
@@ -42,12 +41,16 @@ export default function useContentSwitcher() {
                 fetchContent(id - 1);
                 dispatch(openStoryAction({ ...stories[id - 2] }));
             } else {
-                dispatch(openStoryAction({ isOpen: false }));
-                clearTimeout(timer.current);
+                triggerClose();
             }
         }
     }
 
+    function triggerClose() {
+        setCurrentContent(0);
+        dispatch(openStoryAction({ isOpen: false }));
+        clearTimeout(timer.current);
+    }
     useEffect(() => {
         if (isOpen && content) {
             timer.current = setTimeout(() => {
@@ -66,5 +69,6 @@ export default function useContentSwitcher() {
         index: currentContentIndex,
         nextContent,
         previousContent,
+        triggerClose,
     };
 }

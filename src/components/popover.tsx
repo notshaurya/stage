@@ -1,13 +1,14 @@
-import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { Dialog, DialogClose, DialogContent } from "@/components/ui/dialog";
 import useContentSwitcher from "@/hooks/use-content-switcher";
 import { cn } from "@/lib/utils";
+import { X } from "lucide-react";
 import { useSelector } from "react-redux";
 
 export default function Popover() {
     const { username, profileImg, isOpen } = useSelector((state: any) => state.openStoryReducer);
     const { content } = useSelector((state: any) => state.showContentReducer);
 
-    const { currentContent, index, nextContent, previousContent } = useContentSwitcher();
+    const { currentContent, index, nextContent, previousContent, triggerClose } = useContentSwitcher();
 
     return (
         <Dialog open={isOpen || false}>
@@ -20,6 +21,9 @@ export default function Popover() {
                 <ProfileInfo profileImg={profileImg} username={username} />
                 <PreviousController previousContent={previousContent} />
                 <NextController nextContent={nextContent} />
+                <DialogClose className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground bg-black">
+                    <X className="h-4 w-4 bg-white" onClick={triggerClose} />
+                </DialogClose>
             </DialogContent>
         </Dialog>
     );
