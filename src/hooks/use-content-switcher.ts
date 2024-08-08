@@ -49,6 +49,7 @@ export default function useContentSwitcher() {
     function triggerClose() {
         setCurrentContent(0);
         dispatch(openStoryAction({ isOpen: false }));
+        dispatch(showContentAction({ id: 0, content: [] }));
         clearTimeout(timer.current);
     }
     useEffect(() => {
